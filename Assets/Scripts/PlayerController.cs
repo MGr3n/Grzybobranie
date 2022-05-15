@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 6;
     public Animator animator;
 
+    public int points = 0;
+
 
 
     // gravity
