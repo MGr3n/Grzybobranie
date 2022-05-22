@@ -22,14 +22,29 @@ public class PlayerController : MonoBehaviour
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
 
-        if (characterController.isGrounded) verticalSpeed = 0;
-        else verticalSpeed -= gravity * Time.deltaTime;
+        //Debug.Log(characterController.isGrounded);
+        //if (characterController.isGrounded) verticalSpeed = 0;
+        //else verticalSpeed -= gravity * Time.deltaTime;
 
+        //skakanie
+        if (characterController.isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                verticalSpeed -= 10;
+            }
+        }
+        else
+        {
+            verticalSpeed -= gravity * Time.deltaTime;
+        }
         Vector3 gravityMove = new Vector3(0, verticalSpeed, 0);
         Vector3 move = transform.forward * verticalMove + transform.right * horizontalMove;
-        characterController.Move(verticalSpeed * Time.deltaTime * move + gravityMove * Time.deltaTime);
+        characterController.Move((speed * move) + gravityMove * Time.fixedDeltaTime);
+        //characterController.Move(verticalSpeed * Time.deltaTime * move + gravityMove * Time.deltaTime);
 
-        animator.SetBool("Grounded", verticalMove != 0 || horizontalMove != 0);
+        animator.SetBool("Grounded", characterController.isGrounded);
+        animator.SetFloat("MoveSpeed", move.magnitude);
     }
 
     // camera and rotation
@@ -44,8 +59,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
         Rotate();
+    }
+
+    void FixedUpdate()
+    {
+        Move();
     }
     
   
@@ -64,5 +83,15 @@ public class PlayerController : MonoBehaviour
         cameraHolder.localRotation = Quaternion.Euler(currentRotation);
     }
 
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Interactible"))
+        {
+            Debug.Log("TRIGGER");
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                animator.SetTrigger("Pickup");
+            }
+        }
+    }
 }
