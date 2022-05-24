@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public int points = 0;
 
 
-
     // gravity
     private float gravity = 9.87f;
     private float verticalSpeed = 0;
@@ -84,12 +83,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Interactible"))
+        if (other.CompareTag("Mushroom"))
         {
-            Debug.Log("TRIGGER");
             if (Input.GetKeyDown(KeyCode.G))
             {
+                points += 1;
                 animator.SetTrigger("Pickup");
+                Destroy(other.gameObject);
             }
         }
     }
