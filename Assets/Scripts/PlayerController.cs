@@ -31,13 +31,14 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                verticalSpeed -= 10;
+                verticalSpeed = 10;
             }
         }
         else
         {
             verticalSpeed -= gravity * Time.deltaTime;
         }
+
         Vector3 gravityMove = new Vector3(0, verticalSpeed, 0);
         Vector3 move = transform.forward * verticalMove + transform.right * horizontalMove;
         characterController.Move((speed * move) + gravityMove * Time.fixedDeltaTime);
