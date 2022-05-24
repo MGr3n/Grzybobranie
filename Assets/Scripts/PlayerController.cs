@@ -29,9 +29,11 @@ public class PlayerController : MonoBehaviour
         //skakanie
         if (characterController.isGrounded)
         {
+            verticalSpeed = -gravity;
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                verticalSpeed = 5;
+                verticalSpeed = 8;
             }
         }
         else
