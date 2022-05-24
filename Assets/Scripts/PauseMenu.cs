@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public Transform cameraHolder;
 
+    private PlayerController playerController;
+
 
     // Update is called once per frame
     void Update()
@@ -31,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         Resume();
     }
 
@@ -40,6 +43,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         //cameraHolder.enabled = true;
         GameIsPaused = false;
+        playerController.enabled = true;
     }
 
     void Pause()
@@ -48,6 +52,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
        // cameraHolder.enabled = false;
         GameIsPaused = true;
+        playerController.enabled = false;
     }
 
 
