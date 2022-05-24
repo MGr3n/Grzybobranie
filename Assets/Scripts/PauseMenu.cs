@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public Transform cameraHolder;
+
 
     // Update is called once per frame
     void Update()
@@ -36,6 +38,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        //cameraHolder.enabled = true;
         GameIsPaused = false;
     }
 
@@ -43,6 +46,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+       // cameraHolder.enabled = false;
         GameIsPaused = true;
     }
 

@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                verticalSpeed -= 10;
+                verticalSpeed = 5;
             }
         }
         else
@@ -53,9 +53,6 @@ public class PlayerController : MonoBehaviour
     public float upLimit = -50;
     public float downLimit = 50;
 
-
- 
-
     // Update is called once per frame
     void Update()
     {
@@ -67,8 +64,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
     
-  
-    
+
     public void Rotate()
     {
         float horizontalRotation = Input.GetAxis("Mouse X");

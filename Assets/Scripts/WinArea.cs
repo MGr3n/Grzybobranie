@@ -12,7 +12,7 @@ public class WinArea : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.GetComponent<PlayerController>().points == 2)
+        if (other.GetComponent<PlayerController>().points >= 10)
         {
             
 
