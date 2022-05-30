@@ -4,10 +4,13 @@ using UnityEngine.SceneManagement;
 public class WinArea : MonoBehaviour
 {
     // Start is called before the first frame update
+    
     public int pointsToWin = 10;
     public string level;
     public RectTransform winPanel;
-    
+
+    private PlayerController playerController;
+
 
 
     void OnTriggerEnter(Collider other)
@@ -18,6 +21,7 @@ public class WinArea : MonoBehaviour
             if (other.CompareTag("Player") == true)
             {
                 winPanel.gameObject.SetActive(true);
+                playerController.enabled = false;
             }
         }
     }
@@ -30,7 +34,18 @@ public class WinArea : MonoBehaviour
     void Start()
     {
         winPanel.gameObject.SetActive(false);
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        Resume();
+
     }
+
+    public void Resume()
+    {
+        playerController.enabled = true;
+
+    }
+
+ 
 
     // Update is called once per frame
     void Update()
